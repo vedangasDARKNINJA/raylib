@@ -19,16 +19,18 @@ project "raylib"
         
     filter{}
     
-    defines{
-		"PLATFORM_DESKTOP",
-		"GRAPHICS_API_OPENGL_43"
-	}
+	defines{"PLATFORM_DESKTOP"}
+    if (_OPTIONS["opengl43"]) then
+		defines{"GRAPHICS_API_OPENGL_43"}
+	else
+		defines{"GRAPHICS_API_OPENGL_33"}
+	end
     
     language "C"
     location "%{_MAIN_SCRIPT_DIR}/build/%{prj.name}"
 
-    targetdir "%{_MAIN_SCRIPT_DIR}/build/Game/bin/%{cfg.buildcfg}"
-    objdir "%{_MAIN_SCRIPT_DIR}/build/Game/bin-int/%{cfg.buildcfg}"
+    targetdir "%{_MAIN_SCRIPT_DIR}/build/bin/%{cfg.buildcfg}"
+    objdir "%{_MAIN_SCRIPT_DIR}/build/bin-int/%{cfg.buildcfg}"
     debugdir "%{_MAIN_SCRIPT_DIR}/"
     
     includedirs { "src", "src/external/glfw/include" }
